@@ -156,7 +156,7 @@
   </url>
   
   <url>
-    <loc>https://josephsun.xyz/lib/three/renovate.json</loc>
+    <loc>https://josephsun.xyz/lib/three/README.html</loc>
     
     <lastmod>2020-05-19</lastmod>
     
@@ -170,7 +170,7 @@
   </url>
   
   <url>
-    <loc>https://josephsun.xyz/lib/three/README.html</loc>
+    <loc>https://josephsun.xyz/lib/three/renovate.json</loc>
     
     <lastmod>2020-05-19</lastmod>
     
@@ -200,6 +200,13 @@
   </url>
   
   <url>
+    <loc>https://josephsun.xyz/tags/VS/</loc>
+    <lastmod>2020-11-30</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://josephsun.xyz/tags/Python/</loc>
     <lastmod>2020-11-30</lastmod>
     <changefreq>daily</changefreq>
@@ -207,21 +214,7 @@
   </url>
   
   <url>
-    <loc>https://josephsun.xyz/tags/DeeperLearning/</loc>
-    <lastmod>2020-11-30</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://josephsun.xyz/tags/Data-Mining/</loc>
-    <lastmod>2020-11-30</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://josephsun.xyz/tags/VS/</loc>
     <lastmod>2020-11-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -236,6 +229,13 @@
   
   <url>
     <loc>https://josephsun.xyz/tags/arcgis-for-js/</loc>
+    <lastmod>2020-11-30</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://josephsun.xyz/tags/DeeperLearning/</loc>
     <lastmod>2020-11-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
