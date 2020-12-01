@@ -1,0 +1,188 @@
+<!DOCTYPE html><script type="text/javascript" src="\js\FunnyTitle.js"></script><html lang="zh-CN"><script type="text/javascript" color="220,220,220" opacity="0.7" zindex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2"><meta name="theme-color" content="#222"><meta name="generator" content="Hexo 4.2.1"><link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png"><link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png"><link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png"><link rel="mask-icon" href="/images/logo.svg" color="#222"><link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"><script id="hexo-configurations">var NexT=window.NexT||{},CONFIG={hostname:"josephsun.xyz",root:"/",scheme:"Mist",version:"7.8.0",exturl:!1,sidebar:{position:"right",display:"always",padding:18,offset:12,onmobile:!0},copycode:{enable:!1,show_result:!1,style:null},back2top:{enable:!0,sidebar:!1,scrollpercent:!0},bookmark:{enable:!1,color:"#222",save:"auto"},fancybox:!1,mediumzoom:!1,lazyload:!1,pangu:!1,comments:{style:"tabs",active:null,storage:!0,lazyload:!1,nav:null},algolia:{hits:{per_page:10},labels:{input_placeholder:"Search for Posts",hits_empty:"We didn't find any results for the search: ${query}",hits_stats:"${hits} results found in ${time} ms"}},localsearch:{enable:!1,trigger:"auto",top_n_per_article:1,unescape:!1,preload:!1},motion:{enable:!0,async:!1,transition:{post_block:"fadeIn",post_header:"slideDownIn",post_body:"slideDownIn",coll_header:"slideLeftIn",sidebar:"slideUpIn"}}}</script><meta name="description" content="首先把空间分析下一个定义。什么是空间分析？空间分析是指利用拓扑关系、几何关系或地理属性等来研究事物的一种方法。严格上说空间分析指的并不是一种技术，而是一系列使用不同的分析手段并应用于各个领域的一系列方法。目前空间分析主要的应用是在地理信息系统中用来分析地理数据。———— wiki照我的理解，空间分析是一种解决问题的思路或方法，地理信息系统可以用于进行空间分析。"><meta property="og:type" content="article"><meta property="og:title" content="[空间分析]贰·空间分析"><meta property="og:url" content="https://josephsun.xyz/post/64117416.html"><meta property="og:site_name" content="JosephSun&#39;s Blogs"><meta property="og:description" content="首先把空间分析下一个定义。什么是空间分析？空间分析是指利用拓扑关系、几何关系或地理属性等来研究事物的一种方法。严格上说空间分析指的并不是一种技术，而是一系列使用不同的分析手段并应用于各个领域的一系列方法。目前空间分析主要的应用是在地理信息系统中用来分析地理数据。———— wiki照我的理解，空间分析是一种解决问题的思路或方法，地理信息系统可以用于进行空间分析。"><meta property="og:locale" content="zh_CN"><meta property="article:published_time" content="2020-11-30T11:19:54.000Z"><meta property="article:modified_time" content="2020-12-01T15:53:38.877Z"><meta property="article:author" content="JoeSun"><meta property="article:tag" content="空间分析"><meta name="twitter:card" content="summary"><link rel="canonical" href="https://josephsun.xyz/post/64117416.html"><script id="page-configurations">CONFIG.page={sidebar:"",isHome:!1,isPost:!0,lang:"zh-CN"}</script><title>[空间分析]贰·空间分析 | JosephSun's Blogs</title><script async src="https://www.googletagmanager.com/gtag/js?id=UA-156331840-2"></script><script>function gtag(){dataLayer.push(arguments)}CONFIG.hostname===location.hostname&&(window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-156331840-2"))</script><script>var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="https://hm.baidu.com/hm.js?1263cea084ac2c7b896396b81f9a4fbc";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}()</script><noscript><style>.sidebar-inner,.use-motion .brand,.use-motion .collection-header,.use-motion .comments,.use-motion .menu-item,.use-motion .pagination,.use-motion .post-block,.use-motion .post-body,.use-motion .post-header{opacity:initial}.use-motion .site-subtitle,.use-motion .site-title{opacity:initial;top:initial}.use-motion .logo-line-before i{left:initial}.use-motion .logo-line-after i{right:initial}</style></noscript></head><body itemscope itemtype="http://schema.org/WebPage"><div class="container use-motion"><div class="headband"></div><header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="header-inner"><div class="site-brand-container"><div class="site-nav-toggle"><div class="toggle" aria-label="切换导航栏"><span class="toggle-line toggle-line-first"></span> <span class="toggle-line toggle-line-middle"></span> <span class="toggle-line toggle-line-last"></span></div></div><div class="site-meta"><a href="/" class="brand" rel="start"><span class="logo-line-before"><i></i></span><h1 class="site-title">JosephSun's Blogs</h1><span class="logo-line-after"><i></i></span></a><p class="site-subtitle" itemprop="description">孙先生的失眠日记</p></div><div class="site-nav-right"><div class="toggle popup-trigger"></div></div></div><nav class="site-nav"><ul id="menu" class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-cv"><a href="/CV/" rel="section"><i class="fa fa-user fa-fw"></i>简历</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-archive fa-fw"></i>关于</a></li></ul></nav></div></header><div class="back-to-top"><i class="fa fa-arrow-up"></i> <span>0%</span></div><div class="reading-progress-bar"></div><main class="main"><div class="main-inner"><div class="content-wrap"><div class="content post posts-expand"><article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN"><link itemprop="mainEntityOfPage" href="https://josephsun.xyz/post/64117416.html"><span hidden itemprop="author" itemscope itemtype="http://schema.org/Person"><meta itemprop="image" content="/images/avatar.jpg"><meta itemprop="name" content="JoeSun"><meta itemprop="description" content=""></span><span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization"><meta itemprop="name" content="JosephSun's Blogs"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">[空间分析]贰·空间分析</h1><div class="post-meta"><span class="post-meta-item"><span class="post-meta-item-icon"><i class="far fa-calendar"></i> </span><span class="post-meta-item-text">发表于</span> <time title="创建时间：2020-11-30 19:19:54" itemprop="dateCreated datePublished" datetime="2020-11-30T19:19:54+08:00">2020-11-30</time> </span><span class="post-meta-item"><span class="post-meta-item-icon"><i class="far fa-calendar-check"></i> </span><span class="post-meta-item-text">更新于</span> <time title="修改时间：2020-12-01 23:53:38" itemprop="dateModified" datetime="2020-12-01T23:53:38+08:00">2020-12-01</time> </span><span class="post-meta-item"><span class="post-meta-item-icon"><i class="far fa-folder"></i> </span><span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E7%A9%BA%E9%97%B4%E5%88%86%E6%9E%90/" itemprop="url" rel="index"><span itemprop="name">空间分析</span></a> </span></span><span id="/post/64117416.html" class="post-meta-item leancloud_visitors" data-flag-title="[空间分析]贰·空间分析" title="热度"><span class="post-meta-item-icon"><i class="fa fa-eye"></i> </span><span class="post-meta-item-text">热度：</span> <span class="leancloud-visitors-count"></span> <span>℃</span> </span><span class="post-meta-item" title="热度" id="busuanzi_container_page_pv" style="display:none"><span class="post-meta-item-icon"><i class="fa fa-eye"></i> </span><span class="post-meta-item-text">热度：</span> <span id="busuanzi_value_page_pv"></span> </span><span class="post-meta-item" title="本文字数"><span class="post-meta-item-icon"><i class="far fa-file-word"></i> </span><span>5.3k</span> </span><span class="post-meta-item" title="阅读时长"><span class="post-meta-item-icon"><i class="far fa-clock"></i> </span><span>5 分钟</span></span></div></header><div class="post-body" itemprop="articleBody"><p>首先把空间分析下一个定义。</p><h4 id="什么是空间分析？"><a href="#什么是空间分析？" class="headerlink" title="什么是空间分析？"></a>什么是空间分析？</h4><blockquote><p>空间分析是指利用拓扑关系、几何关系或地理属性等来研究事物的一种方法。严格上说空间分析指的并不是一种技术，而是一系列使用不同的分析手段并应用于各个领域的一系列方法。目前空间分析主要的应用是在地理信息系统中用来分析地理数据。</p><p>———— <strong>wiki</strong></p></blockquote><p>照我的理解，空间分析是一种解决问题的思路或方法，地理信息系统可以用于进行空间分析。</p><a id="more"></a><h4 id="空间分析要解决什么问题？"><a href="#空间分析要解决什么问题？" class="headerlink" title="空间分析要解决什么问题？"></a>空间分析要解决什么问题？</h4><p>空间分析为发现地理对象和过程的规律性或模式提供定量的描述、分析和统计依据支持。</p><p>模式包括：时空趋势、分布情况、相关性、异质性、临近性、可达性等。</p><h4 id="空间分析有哪些方法？"><a href="#空间分析有哪些方法？" class="headerlink" title="空间分析有哪些方法？"></a>空间分析有哪些方法？</h4><ul><li><p>空间数据分析</p></li><li><p>空间自相关</p></li><li><p>空间异质性</p></li><li><p>空间插值</p></li><li><p>空间回归</p></li><li><p>空间交互</p></li><li><p>空间模拟 —— CA元胞自动机 / ABM 基于代理模型</p></li><li><p>等等</p></li></ul><h4 id="空间分析的数据类型"><a href="#空间分析的数据类型" class="headerlink" title="空间分析的数据类型"></a>空间分析的数据类型</h4><ul><li><strong>Real-valued （数值型）</strong><br>例子：温度、降雨、浓度、Biomass…</li><li><strong>Binary （二值型）</strong><br>例子：yes/no, true/false, success/failure, …</li><li><strong>Categorical（类别/层次）</strong><br>例子：land type, categorical income, …</li><li><strong>Ordinal（次序）</strong><br>例子：rank, order<br>“unhappy/fine/happy/ very happy”…</li><li><strong>Count（计数）</strong><br>例子：building, tree, animal, car, people…</li><li><strong>Binominal（项）</strong><br>例子：发病数/N人口, 不同职业人数/ N人口…<br>Others…</li></ul><blockquote><p>至少要分清<strong>数值型、类别/层次型、计数型</strong></p></blockquote><h3 id="了解空间分析之前，我们还需要先了解点统计学的基础知识。"><a href="#了解空间分析之前，我们还需要先了解点统计学的基础知识。" class="headerlink" title="了解空间分析之前，我们还需要先了解点统计学的基础知识。"></a>了解空间分析之前，我们还需要先了解点<strong>统计学</strong>的基础知识。</h3><h4 id="概率与概率分布"><a href="#概率与概率分布" class="headerlink" title="概率与概率分布"></a>概率与概率分布</h4><blockquote><p>概率 (Probability) - 是对一个(随机)事件发生的可能性的度量</p></blockquote><p>就好比天气预报以前说明天有雨，结果没下，大家就说天气预报不准。现在聪明多了，改成了今天会下雨的概率，如果没发生，确实也有没法生的概率。</p><blockquote><p>概率密度函数 (Probability density function, PDF) - 刻画连续型随机变量取不同值的相对可能性大小(relative likelihood)</p><p>概率质量函数 (Probability mass function，PMF) - 用于刻画离散型随机变量取值的相对可能性</p></blockquote><h5 id="大概率小事件-vs-小概率大事件"><a href="#大概率小事件-vs-小概率大事件" class="headerlink" title="大概率小事件 vs. 小概率大事件"></a>大概率小事件 vs. 小概率大事件</h5><blockquote><p>大概率事件</p></blockquote><p>炒股的散户大多都是赔的</p><blockquote><p>小概率大事件必然发生</p></blockquote><p>散户们能赚到钱(小概率事件必然发生是正确的，但是这句话的含义是小概率事件迟早发生的概率为1，并不是在某次试验中小概率事件必然发生)</p><blockquote><p>分析的目的之一发现<strong>小概率大事件</strong></p></blockquote><h4 id="随机变量的数字特征"><a href="#随机变量的数字特征" class="headerlink" title="随机变量的数字特征"></a>随机变量的数字特征</h4><p>随机变量和变量的区别是什么？先举几个随机变量的例子：骰子(离散型)、等待公交车的时间(连续型)、足彩(随机向量)。也就是说随机变量是可以用概率来描述的，而变量无法量化。</p><blockquote><p>但是实际问题的概率分布通常很难确定，通过样本 (Sample) 对概率总体 (Population) 进行估计，常利用数字特征来刻画随机变量的特点。</p></blockquote><p>通俗的讲，一个黑箱中多个球，我多次有放回的去摸球，摸出来的球就是样本，我用我自己的结果去估计黑箱中的原本的球构成。</p><blockquote><p>样本均值 (Mean) - 变量观测值的中心趋势-总体期望μ的点估计</p><p>样本方差 (Sample variance) - 变量观测值偏离均值的程度总体方差σ^2^的无偏点估计</p><p>中位数 (Median) - 变量观测值大小中间的值</p><p>分位数 (Quantiles) - 将变量分割成连续等概率分布区间的值；四分位数 (Quartiles) 是分割为4个区间的值;</p></blockquote><h4 id="统计假设检验"><a href="#统计假设检验" class="headerlink" title="统计假设检验"></a>统计假设检验</h4><h5 id="统计假设检验-显著性检验（Statistical-hypothesis-testing"><a href="#统计假设检验-显著性检验（Statistical-hypothesis-testing" class="headerlink" title="统计假设检验/显著性检验（Statistical hypothesis testing)"></a>统计假设检验/显著性检验（Statistical hypothesis testing)</h5><p>现在谈谈怎么去进行统计研究。</p><p>核心思想为某种带有概率性质的反证法。即先认为某种假设是成立的，如果导出一个不合理的现象，则拒绝假设，称为不相容的 (incompatible)，可以接受替代假设；否则不能拒绝假设，称为相容的。</p><p>不合理的现象是指“发生了小概率事件”- 某个由样本的计算统计量位于概率分布的两端</p><p>假设检验中的假设包括两个：原假设 H~0~ 和备择假设 H~1~</p><p>选取原则：</p><ul><li>应当把如果它成立但是误判为不成立时会造成严重后果的命题作为原假设。</li><li>应当把分析人员想证明它正确的命题作为备择假设，把分析人员努力证明它不正确的命题作为原假设</li><li>应当把大众普遍认为它成立的命题作为原假设，因为原假设不应当轻易拒绝，除非有足够的证据表明他不正确。</li></ul><h5 id="参数检验和非参数检验"><a href="#参数检验和非参数检验" class="headerlink" title="参数检验和非参数检验"></a>参数检验和非参数检验</h5><ul><li>非参数检验不意味着不使用参数（是不使用总体分布的特征参数）</li><li>参数检验适用于正态总体，非参数适用于非正态总体</li><li>参数检验考虑总体分布，通过估算总体参数构建检验统计量</li><li>非参数检验不考虑总体分布，直接构建统计检验量</li><li>参数检验利用总体信息，非参数检验利用样本信息</li><li>参数检验参数固定，非参数检验参数不固定</li></ul><blockquote><div class="table-container"><table><thead><tr><th></th><th>Parametric tests</th><th>Nonparametric tests</th></tr></thead><tbody><tr><td>One sample</td><td>One sample test</td><td>Sign test<br>Wilcoxon’s signed rank test</td></tr><tr><td>Two sample</td><td>Paired t test</td><td>Sign test<br>Wilcoxon’s signed rank test</td></tr><tr><td></td><td>Unpaired t test</td><td>Mann-Whitney test<br>Kolmorogov-Sminiov test</td></tr><tr><td>K-sample</td><td>Analysis of variance</td><td>Kruskal-Wallis test<br>Jonckheer test</td></tr><tr><td></td><td>2 way analysis of variance</td><td>Friedman test</td></tr></tbody></table></div></blockquote><h5 id="空间-统计假设检验一般步骤-Null-Hypothesis-Significance-Testing-NHST"><a href="#空间-统计假设检验一般步骤-Null-Hypothesis-Significance-Testing-NHST" class="headerlink" title="(空间) 统计假设检验一般步骤 (Null Hypothesis Significance Testing- NHST)"></a>(空间) 统计假设检验一般步骤 (Null Hypothesis Significance Testing- NHST)</h5><ul><li><p>确定H~0~(null) 和H~1~(alternative)</p></li><li><p>选择统计量与分布形式</p></li><li><p>计算统计量</p></li><li><p>选择显著水平α</p></li><li><p>比较计算统计量和选定显著水平下的理论临界值大小，得出检验结论</p><p>[如果计算值&gt; (OR &lt;, 单侧/双侧)显著水平α下的理论值，小概率事件发生，拒绝H~0~, 接受H~1~]</p></li></ul><p><strong>如果H~0~没有被拒绝，则没有显著相关性(趋势)，并发现在统计量与</strong> …</p><blockquote><p>不可以说接受H~0~！！！贝叶斯方法可以说接受！！！</p></blockquote><h4 id="Student’s-t-test"><a href="#Student’s-t-test" class="headerlink" title="Student’s t-test"></a>Student’s t-test</h4><ul><li><p>计算统计量t满足N-1个自由度(~独立观测个数)的Student’s t分布</p></li><li><p>t = mean(tmp)/sd(tmp)×sqrt(length(tmp)) # = 2.746</p></li><li><p>α = 0.05显著水平下8个自由度t分布的临界值：qt(0.95, df=8) # =1.859</p></li><li><p>样本计算值t &gt; 临界值，小概率事件发生，拒绝H0，接受H1</p></li><li><p>临界值右侧曲线下的面积0.05，单尾检验小概率事件<br>发生的区间</p></li><li><pre><code class="lang-R">pnorm(-1.96) = 0.025
+</code></pre></li></ul><h4 id="Z-Scores"><a href="#Z-Scores" class="headerlink" title="Z-Scores"></a>Z-Scores</h4><ul><li><p>Z-Scores (也称作：standard scores, z-values, standardized variables, normal scores)，对于一个 raw score x：</p></li><li><p>z满足标准正态分布N(0,1)，用于H0下检验分布可以由正态分布来近似的统计检验，称为Z-test</p></li><li><p>中心极限定理(the central limit theorem)表明，对于大样本(n &gt; 30?)来说，许多检验统计都可以由正态分布来近似 (小样本t-test更合适)</p></li><li><p>Z-test也特指the one-sample location test</p><p>location参数包括mean, median, mode等</p></li><li><p>一般来说H0：观测统计量(均值)=给定随机条件下的总体期望值</p></li><li><p>Z-test具有唯一的临界值</p></li><li><p>alpha=0.05<br>双侧：[-1.96, +1.96]<br>单侧：[-1.65, +1.65]</p></li></ul><h4 id="T检验、方差分析、非参检验、卡方检验的使用要求和适用场景"><a href="#T检验、方差分析、非参检验、卡方检验的使用要求和适用场景" class="headerlink" title="T检验、方差分析、非参检验、卡方检验的使用要求和适用场景"></a>T检验、方差分析、非参检验、卡方检验的使用要求和适用场景</h4><p><a href="https://blog.csdn.net/youngmiffy/article/details/53490495?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.add_param_isCf&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-2.add_param_isCf" target="_blank" rel="noopener">1</a> <a href="https://blog.csdn.net/qq_22592457/article/details/92982170" target="_blank" rel="noopener">2</a></p><p><strong>1、有关平均值参数u的假设检验</strong></p><p>根据是否已知方差,分为两类检验：U检验和T检验。<br>如果已知方差，则使用U检验，如果方差未知则采取T检验。</p><p><strong>2、有关参数方差σ2的假设检验</strong></p><p>F检验是对两个正态分布的方差齐性检验，简单来说，就是检验两个分布的方差是否相等</p><p><strong>3、检验两个或多个变量之间是否关联</strong></p><p>卡方检验属于非参数检验，主要是比较两个及两个以上样本率（构成比）以及两个分类变量的关联性分析。根本思想在于比较理论频数和实际频数的吻合程度或者拟合优度问题。</p><h4 id="Mann-Whitney-U-test"><a href="#Mann-Whitney-U-test" class="headerlink" title="Mann-Whitney U test"></a>Mann-Whitney U test</h4><ul><li><p>Mann-Whitney U 检验(Wilcoxon rank-sum检验)是一种非参数的检验方法，不要求满足任何分布，基于样本构造检验统计量，用来检验两个独立样本是否来自同一个总体</p></li><li><p>将数值转换成次序，混合排序，对异常值不敏感，只关心相对大小排序，不关心绝对。</p></li><li><p>第一步，两个样本混合排序</p></li><li><p>第二步，计算每个样本秩的和，排列后的次序相加</p></li><li><p>第三步，计算统计量</p><script type="math/tex;mode=display">U_1=R_1-\frac{n_1(n_1+1)}{2}</script><script type="math/tex;mode=display">U_2=R_2-\frac{n_2(n_2+1)}{2}</script></li><li><p>第四步，小样本时利用Wilcoxon rank sum statistic分布精确计算p-value</p></li></ul><h4 id="正态性检验"><a href="#正态性检验" class="headerlink" title="正态性检验"></a>正态性检验</h4><ul><li>正态性检验(Normality test)是检验观测数据是否符合正态分布</li><li>参数检验经常要求数据符合正态分布</li><li>如果不满足正态分布，推荐使用非参数方法</li></ul><h5 id="Shapiro–Wilk-test"><a href="#Shapiro–Wilk-test" class="headerlink" title="Shapiro–Wilk test"></a><a href="https://en.wikipedia.org/wiki/Shapiro%E2%80%93Wilk_test" target="_blank" rel="noopener">Shapiro–Wilk test</a></h5><ul><li><p>针对正态分布</p></li><li><p>H~0~: 样本来自正态总体</p></li><li><p>检验统计量</p><script type="math/tex;mode=display">W = \frac { ( \sum _ { i = 1 } ^ { n } a _ { i } x _ { ( i ) } ) ^ { 2 } } { \sum _ { i = 1 } ^ { n } ( x _ { i } - \overline { x } ) ^ { 2 } }</script></li></ul><blockquote><p>The null-hypothesis of this test is that the population is normally distributed. Thus, if the p value is less than the chosen alpha level, then the null hypothesis is rejected and there is evidence that the data tested are not normally distributed. On the other hand, if the p value is greater than the chosen alpha level, then the null hypothesis (that the data came from a normally distributed population) can not be rejected (e.g., for an alpha level of .05, a data set with a p value of less than .05 rejects the null hypothesis that the data are from a normally distributed population).</p></blockquote><h5 id="Kolmogorov‐Smirnov-test-——-KS检验"><a href="#Kolmogorov‐Smirnov-test-——-KS检验" class="headerlink" title="Kolmogorov‐Smirnov test —— KS检验"></a><a href="https://en.wikipedia.org/wiki/Kolmogorov%E2%80%93Smirnov_test" target="_blank" rel="noopener">Kolmogorov‐Smirnov test —— KS检验</a></h5><ul><li>非参数检验方法, 适用于一般分布，其他分布</li><li>检验统计量为样本的经验分布和参考累积分布之间的最大差</li><li>当分布参数未知时, 结果不可靠, 使用 <a href="https://en.wikipedia.org/wiki/Monte_Carlo_method" target="_blank" rel="noopener">Monte‐Carlo</a>方法</li></ul><h4 id="Effect-Size-效应量"><a href="#Effect-Size-效应量" class="headerlink" title="Effect Size (效应量)"></a>Effect Size (效应量)</h4><ul><li><p>Effect size is a statistical concept that measures the strength of the relationship between two variables on a numeric scale</p></li><li><p>效应量——p值显著不显著，采用”度”描述，显著程度。</p></li><li><p>各个论文中不同时间地区的结论可以相互比较的方法，计算不同效应量，然后得出对比结论</p></li><li><p><a href="https://en.wikipedia.org/wiki/Meta-analysis" target="_blank" rel="noopener">Meta - analysis (元分析)</a></p><blockquote><p>统计学上来说，元分析（meta-analysis，或译作后设分析、整合分析、综合分析、统合分析、荟萃分析）是指将多个研究结果整合在一起的统计方法。就用途而言，它是文献回顾的新方法。</p><p>文献回顾的传统方法是叙事式的，由作者自行挑选觉得重要的前人研究，当各研究结论冲突时，由作者自行判断哪一种结论较具价值。反之，后设分析采用系统化的资料收集和数值分析，让文献回顾更具客观性与证据力。这些组合后的结果会有助于以更加全面性的证据观察来支持或拒绝某一主题研究的假设，发现该主题迄今研究的不足处，发现各种可能影响效应量的中介因素。</p></blockquote></li><li><p>对于T检验的效应量一般常用 Cohen’s d 效应量指标</p><p>方法1：</p><p>$Cohen’s d = (M<em>2 - M_1)/SD</em>{pooled}$</p><p>SD~pooled~ 为联合方差 —— $ SD_{pooled} =\sqrt {\frac{SD^2_1+SD^2_2}{2}}$</p><p>方法2：</p><p>$d =\frac{|\overline x_1-\overline x_2|} {\sqrt{\frac{(n_1-1)s^2_1+(n2-1)s^2_2}{n_1+n_2-2} }}$</p></li></ul><h4 id="Bayesian-inference"><a href="#Bayesian-inference" class="headerlink" title="Bayesian inference"></a>Bayesian inference</h4><p>结论写法：</p><ul><li><p>Median of diff. = -0.19 接近 mean(x1) - mean(x2) = -0.20</p></li><li><p>不确定性为: [-0.28, -0.08] -&gt;89%CI (credible interval)</p></li><li><p>The Probability of Direction, pd = 0.99表明差异是负值的概率为99%以上</p></li><li><p>Bayes Factors, BF = 17.7 for H1表明：</p><p>(1) 17 times more probable under H1 compared to H0;</p><p>(2) 数据提供了strong evidence against the null hypothesis (H0)</p></li></ul></div><footer class="post-footer"><div class="post-tags"><a href="/tags/%E7%A9%BA%E9%97%B4%E5%88%86%E6%9E%90/" rel="tag"><i class="fa fa-tag"></i> 空间分析</a></div><div class="post-nav"><div class="post-nav-item"><a href="/post/b3be695d.html" rel="prev" title="[空间分析]壹·缘起"><i class="fa fa-chevron-left"></i> [空间分析]壹·缘起</a></div><div class="post-nav-item"><a href="/post/f5b12c10.html" rel="next" title="[空间分析]叁·地理统计">[空间分析]叁·地理统计 <i class="fa fa-chevron-right"></i></a></div></div></footer></article></div><script>window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }</script></div><div class="toggle sidebar-toggle"><span class="toggle-line toggle-line-first"></span> <span class="toggle-line toggle-line-middle"></span> <span class="toggle-line toggle-line-last"></span></div><aside class="sidebar"><div class="sidebar-inner"><ul class="sidebar-nav motion-element"><li class="sidebar-nav-toc">文章目录</li><li class="sidebar-nav-overview">站点概览</li></ul><div class="post-toc-wrap sidebar-panel"><div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#什么是空间分析？"><span class="nav-number">1.</span> <span class="nav-text">什么是空间分析？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#空间分析要解决什么问题？"><span class="nav-number">2.</span> <span class="nav-text">空间分析要解决什么问题？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#空间分析有哪些方法？"><span class="nav-number">3.</span> <span class="nav-text">空间分析有哪些方法？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#空间分析的数据类型"><span class="nav-number">4.</span> <span class="nav-text">空间分析的数据类型</span></a></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#了解空间分析之前，我们还需要先了解点统计学的基础知识。"><span class="nav-number"></span> <span class="nav-text">了解空间分析之前，我们还需要先了解点统计学的基础知识。</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#概率与概率分布"><span class="nav-number">1.</span> <span class="nav-text">概率与概率分布</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#大概率小事件-vs-小概率大事件"><span class="nav-number">1.1.</span> <span class="nav-text">大概率小事件 vs. 小概率大事件</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#随机变量的数字特征"><span class="nav-number">2.</span> <span class="nav-text">随机变量的数字特征</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#统计假设检验"><span class="nav-number">3.</span> <span class="nav-text">统计假设检验</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#统计假设检验-显著性检验（Statistical-hypothesis-testing"><span class="nav-number">3.1.</span> <span class="nav-text">统计假设检验&#x2F;显著性检验（Statistical hypothesis testing)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#参数检验和非参数检验"><span class="nav-number">3.2.</span> <span class="nav-text">参数检验和非参数检验</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#空间-统计假设检验一般步骤-Null-Hypothesis-Significance-Testing-NHST"><span class="nav-number">3.3.</span> <span class="nav-text">(空间) 统计假设检验一般步骤 (Null Hypothesis Significance Testing- NHST)</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Student’s-t-test"><span class="nav-number">4.</span> <span class="nav-text">Student’s t-test</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Z-Scores"><span class="nav-number">5.</span> <span class="nav-text">Z-Scores</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#T检验、方差分析、非参检验、卡方检验的使用要求和适用场景"><span class="nav-number">6.</span> <span class="nav-text">T检验、方差分析、非参检验、卡方检验的使用要求和适用场景</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Mann-Whitney-U-test"><span class="nav-number">7.</span> <span class="nav-text">Mann-Whitney U test</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#正态性检验"><span class="nav-number">8.</span> <span class="nav-text">正态性检验</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Shapiro–Wilk-test"><span class="nav-number">8.1.</span> <span class="nav-text">Shapiro–Wilk test</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Kolmogorov‐Smirnov-test-——-KS检验"><span class="nav-number">8.2.</span> <span class="nav-text">Kolmogorov‐Smirnov test —— KS检验</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Effect-Size-效应量"><span class="nav-number">9.</span> <span class="nav-text">Effect Size (效应量)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Bayesian-inference"><span class="nav-number">10.</span> <span class="nav-text">Bayesian inference</span></a></li></ol></li></div></div><div class="site-overview-wrap sidebar-panel"><div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person"><img class="site-author-image" itemprop="image" alt="JoeSun" src="/images/avatar.jpg"><p class="site-author-name" itemprop="name">JoeSun</p><div class="site-description" itemprop="description"></div></div><div class="site-state-wrap motion-element"><nav class="site-state"><div class="site-state-item site-state-posts"><a href="/archives"><span class="site-state-item-count">20</span> <span class="site-state-item-name">日志</span></a></div><div class="site-state-item site-state-categories"><a href="/categories/"><span class="site-state-item-count">6</span> <span class="site-state-item-name">分类</span></a></div><div class="site-state-item site-state-tags"><a href="/tags/"><span class="site-state-item-count">13</span> <span class="site-state-item-name">标签</span></a></div></nav></div><div class="links-of-author motion-element"><span class="links-of-author-item"><a href="https://github.com/JosephSun-6" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;JosephSun-6" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a> </span><span class="links-of-author-item"><a href="mailto:417773447@qq.com" title="E-Mail → mailto:417773447@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a></span></div></div><script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script><script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script><div class="widget-wrap"><div id="myCanvasContainer" class="widget tagcloud"><canvas width="220" height="250" id="resCanvas"><ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Mining/" rel="tag">Data Mining</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DeeperLearning/" rel="tag">DeeperLearning</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDL/" rel="tag">IDL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VS/" rel="tag">VS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/arcgis-for-js/" rel="tag">arcgis for js</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/" rel="tag">js</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B8%A9%E5%BA%A6%E5%8F%8D%E6%BC%94/" rel="tag">温度反演</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E6%B4%BB/" rel="tag">生活</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A9%BA%E9%97%B4%E5%88%86%E6%9E%90/" rel="tag">空间分析</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a><span class="tag-list-count">1</span></li></ul></canvas></div></div></div></aside><div id="sidebar-dimmer"></div></div></main><footer class="footer"><div class="footer-inner"><div class="beian"><a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">晋ICP备20000688号-1 </a><img src="/image/beian.jpg" style="display:inline-block"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=14082702000119" rel="noopener" target="_blank">晋公网备案 14082702000119号</a></div><div class="copyright">&copy; <span itemprop="copyrightYear">2020</span> <span class="with-love"><i class="fa fa-heart"></i> </span><span class="author" itemprop="copyrightHolder">JoeSun</span> <span class="post-meta-divider">|</span> <span class="post-meta-item-icon"><i class="fa fa-chart-area"></i> </span><span title="站点总字数">51k</span> <span class="post-meta-divider">|</span> <span class="post-meta-item-icon"><i class="fa fa-coffee"></i> </span><span title="站点阅读时长">47 分钟</span></div><div class="busuanzi-count"><script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span class="post-meta-item" id="busuanzi_container_site_uv" style="display:none"><span class="post-meta-item-icon"><i class="fa fa-user"></i> </span><span class="site-uv" title="总访客量"><span id="busuanzi_value_site_uv"></span> </span></span><span class="post-meta-divider">|</span> <span class="post-meta-item" id="busuanzi_container_site_pv" style="display:none"><span class="post-meta-item-icon"><i class="fa fa-eye"></i> </span><span class="site-pv" title="总访问量"><span id="busuanzi_value_site_pv"></span></span></span></div><script>(function() {
+    function leancloudSelector(url) {
+      url = encodeURI(url);
+      return document.getElementById(url).querySelector('.leancloud-visitors-count');
+    }
+
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.id);
+      var title = visitors.dataset.flagTitle;
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            leancloudSelector(url).innerText = counter.time + 1;
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              });
+          } else {
+              Counter('post', '/classes/Counter', { title, url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.id);
+      });
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url: { '$in': entries } })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          for (let url of entries) {
+            let target = results.find(item => item.url === url);
+            leancloudSelector(url).innerText = target ? target.time : 0;
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    let { app_id, app_key, server_url } = {"enable":true,"app_id":"lGA8jDiu9xwPn8eGaVF2Ne2q-gzGzoHsz","app_key":"lI98i4LNGKqPDmaQTixb93yG","security":false,"betterPerformance":false};
+    function fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${api_server}/1.1${url}`, {
+          method,
+          headers: {
+            'X-LC-Id'     : app_id,
+            'X-LC-Key'    : app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    }
+
+    let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+
+    if (api_server) {
+      fetchData(api_server);
+    } else {
+      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+        .then(response => response.json())
+        .then(({ api_server }) => {
+          fetchData('https://' + api_server);
+        });
+    }
+  })();</script></div></footer></div><script color="0,0,254" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script><script src="/lib/anime.min.js"></script><script src="/lib/velocity/velocity.min.js"></script><script src="/lib/velocity/velocity.ui.min.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><script>!function(){var e,t,o,n,r=document.getElementsByTagName("link");if(0<r.length)for(i=0;i<r.length;i++)"canonical"==r[i].rel.toLowerCase()&&r[i].href&&(e=r[i].href);t=(e||window.location.protocol).split(":")[0],e=e||window.location.href,window,o=e,n=document.referrer,/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi.test(o)||(t="https"===String(t).toLowerCase()?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif",n?(t+="?r="+encodeURIComponent(document.referrer),o&&(t+="&l="+o)):o&&(t+="?l="+o),(new Image).src=t)}()</script><script>if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}</script><script>if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }</script><script>NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'lGA8jDiu9xwPn8eGaVF2Ne2q-gzGzoHsz',
+      appKey     : 'lI98i4LNGKqPDmaQTixb93yG',
+      placeholder: "Just go go",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});</script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({pluginRootPath:"live2dw/",pluginJsPath:"lib/",pluginModelPath:"assets/",tagMode:!1,debug:!1,model:{jsonPath:"/live2dw/assets/hijiki.model.json"},display:{position:"left",width:150,height:300},mobile:{show:!0},react:{opacity:.7},log:!1})</script></body></html>
