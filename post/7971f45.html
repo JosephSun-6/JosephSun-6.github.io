@@ -1,0 +1,191 @@
+<!DOCTYPE html><script type="text/javascript" src="\js\FunnyTitle.js"></script><html lang="zh-CN"><script type="text/javascript" color="220,220,220" opacity="0.7" zindex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2"><meta name="theme-color" content="#222"><meta name="generator" content="Hexo 4.2.1"><link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png"><link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png"><link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png"><link rel="mask-icon" href="/images/logo.svg" color="#222"><link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"><script id="hexo-configurations">var NexT=window.NexT||{},CONFIG={hostname:"josephsun.xyz",root:"/",scheme:"Mist",version:"7.8.0",exturl:!1,sidebar:{position:"right",display:"always",padding:18,offset:12,onmobile:!0},copycode:{enable:!1,show_result:!1,style:null},back2top:{enable:!0,sidebar:!1,scrollpercent:!0},bookmark:{enable:!1,color:"#222",save:"auto"},fancybox:!1,mediumzoom:!1,lazyload:!1,pangu:!1,comments:{style:"tabs",active:null,storage:!0,lazyload:!1,nav:null},algolia:{hits:{per_page:10},labels:{input_placeholder:"Search for Posts",hits_empty:"We didn't find any results for the search: ${query}",hits_stats:"${hits} results found in ${time} ms"}},localsearch:{enable:!1,trigger:"auto",top_n_per_article:1,unescape:!1,preload:!1},motion:{enable:!0,async:!1,transition:{post_block:"fadeIn",post_header:"slideDownIn",post_body:"slideDownIn",coll_header:"slideLeftIn",sidebar:"slideUpIn"}}}</script><meta name="description" content="这一篇谈谈 u-test(z-test) 和 Mann–Whitney U testz-testZ检验，也称“U检验”，是为了检验在H0情况下样本数据能否可以接近正态分布的一种统计测试。Z-test也特指the one-sample location test 。如果将普通正态分布转换成标准正态分布，其核心在于z-score公式z_i&#x3D;\frac{X_i - \mu_0}{\sigma}$X_i$"><meta property="og:type" content="article"><meta property="og:title" content="[空间分析]叁·地理统计2"><meta property="og:url" content="https://josephsun.xyz/post/7971f45.html"><meta property="og:site_name" content="JosephSun&#39;s Blogs"><meta property="og:description" content="这一篇谈谈 u-test(z-test) 和 Mann–Whitney U testz-testZ检验，也称“U检验”，是为了检验在H0情况下样本数据能否可以接近正态分布的一种统计测试。Z-test也特指the one-sample location test 。如果将普通正态分布转换成标准正态分布，其核心在于z-score公式z_i&#x3D;\frac{X_i - \mu_0}{\sigma}$X_i$"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://josephsun.xyz/post/7971f45/image-20201203214839241.png"><meta property="og:image" content="https://josephsun.xyz/post/7971f45/image-20201203215142342.png"><meta property="og:image" content="https://josephsun.xyz/post/7971f45/image-20201203215203745.png"><meta property="og:image" content="https://josephsun.xyz/post/7971f45/image-20201203215249435.png"><meta property="og:image" content="https://josephsun.xyz/post/7971f45/v2-044674d02d820d94ec7d8e409978b43a_720w.png"><meta property="article:published_time" content="2020-12-02T11:42:24.000Z"><meta property="article:modified_time" content="2020-12-06T12:20:40.878Z"><meta property="article:author" content="JoeSun"><meta property="article:tag" content="空间分析"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://josephsun.xyz/post/7971f45/image-20201203214839241.png"><link rel="canonical" href="https://josephsun.xyz/post/7971f45.html"><script id="page-configurations">CONFIG.page={sidebar:"",isHome:!1,isPost:!0,lang:"zh-CN"}</script><title>[空间分析]叁·地理统计2 | JosephSun's Blogs</title><script async src="https://www.googletagmanager.com/gtag/js?id=UA-156331840-2"></script><script>function gtag(){dataLayer.push(arguments)}CONFIG.hostname===location.hostname&&(window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-156331840-2"))</script><script>var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="https://hm.baidu.com/hm.js?1263cea084ac2c7b896396b81f9a4fbc";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}()</script><noscript><style>.sidebar-inner,.use-motion .brand,.use-motion .collection-header,.use-motion .comments,.use-motion .menu-item,.use-motion .pagination,.use-motion .post-block,.use-motion .post-body,.use-motion .post-header{opacity:initial}.use-motion .site-subtitle,.use-motion .site-title{opacity:initial;top:initial}.use-motion .logo-line-before i{left:initial}.use-motion .logo-line-after i{right:initial}</style></noscript></head><body itemscope itemtype="http://schema.org/WebPage"><div class="container use-motion"><div class="headband"></div><header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="header-inner"><div class="site-brand-container"><div class="site-nav-toggle"><div class="toggle" aria-label="切换导航栏"><span class="toggle-line toggle-line-first"></span> <span class="toggle-line toggle-line-middle"></span> <span class="toggle-line toggle-line-last"></span></div></div><div class="site-meta"><a href="/" class="brand" rel="start"><span class="logo-line-before"><i></i></span><h1 class="site-title">JosephSun's Blogs</h1><span class="logo-line-after"><i></i></span></a><p class="site-subtitle" itemprop="description">孙先生的失眠日记</p></div><div class="site-nav-right"><div class="toggle popup-trigger"></div></div></div><nav class="site-nav"><ul id="menu" class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-cv"><a href="/CV/" rel="section"><i class="fa fa-user fa-fw"></i>简历</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-archive fa-fw"></i>关于</a></li></ul></nav></div></header><div class="back-to-top"><i class="fa fa-arrow-up"></i> <span>0%</span></div><div class="reading-progress-bar"></div><main class="main"><div class="main-inner"><div class="content-wrap"><div class="content post posts-expand"><article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN"><link itemprop="mainEntityOfPage" href="https://josephsun.xyz/post/7971f45.html"><span hidden itemprop="author" itemscope itemtype="http://schema.org/Person"><meta itemprop="image" content="/images/avatar.jpg"><meta itemprop="name" content="JoeSun"><meta itemprop="description" content=""></span><span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization"><meta itemprop="name" content="JosephSun's Blogs"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">[空间分析]叁·地理统计2</h1><div class="post-meta"><span class="post-meta-item"><span class="post-meta-item-icon"><i class="far fa-calendar"></i> </span><span class="post-meta-item-text">发表于</span> <time title="创建时间：2020-12-02 19:42:24" itemprop="dateCreated datePublished" datetime="2020-12-02T19:42:24+08:00">2020-12-02</time> </span><span class="post-meta-item"><span class="post-meta-item-icon"><i class="far fa-calendar-check"></i> </span><span class="post-meta-item-text">更新于</span> <time title="修改时间：2020-12-06 20:20:40" itemprop="dateModified" datetime="2020-12-06T20:20:40+08:00">2020-12-06</time> </span><span class="post-meta-item"><span class="post-meta-item-icon"><i class="far fa-folder"></i> </span><span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E7%A9%BA%E9%97%B4%E5%88%86%E6%9E%90/" itemprop="url" rel="index"><span itemprop="name">空间分析</span></a> </span></span><span id="/post/7971f45.html" class="post-meta-item leancloud_visitors" data-flag-title="[空间分析]叁·地理统计2" title="热度"><span class="post-meta-item-icon"><i class="fa fa-eye"></i> </span><span class="post-meta-item-text">热度：</span> <span class="leancloud-visitors-count"></span> <span>℃</span> </span><span class="post-meta-item" title="热度" id="busuanzi_container_page_pv" style="display:none"><span class="post-meta-item-icon"><i class="fa fa-eye"></i> </span><span class="post-meta-item-text">热度：</span> <span id="busuanzi_value_page_pv"></span> </span><span class="post-meta-item" title="本文字数"><span class="post-meta-item-icon"><i class="far fa-file-word"></i> </span><span>7k</span> </span><span class="post-meta-item" title="阅读时长"><span class="post-meta-item-icon"><i class="far fa-clock"></i> </span><span>6 分钟</span></span></div></header><div class="post-body" itemprop="articleBody"><p>这一篇谈谈 u-test(z-test) 和 Mann–Whitney U test</p><h4 id="z-test"><a href="#z-test" class="headerlink" title="z-test"></a>z-test</h4><p>Z检验，也称“U检验”，是为了检验在H<sub>0</sub>情况下样本数据能否可以接近正态分布的一种统计测试。Z-test也特指the one-sample location test 。</p><p>如果将普通正态分布转换成标准正态分布，其核心在于z-score公式</p><script type="math/tex;mode=display">z_i=\frac{X_i - \mu_0}{\sigma}</script><p>$X_i$ 是样本总体数据中的第i个数据；$\mu$ 是总体均值；$\sigma$ 是总体标准差</p><p>根据中心极限定理，在大样本条件下许多测验可以被贴合为正态分布。当实际标准差未知，而样本容量较小（小于等于30）时，T-test更加适用。</p><p>步骤：</p><p>第一步，建立H<sub>0</sub>假设：$\mu_1 = \mu_2$，假定两个样本均值无显著差异或者一组的样本均值与已知总体均值无显著差异。</p><p>第二步，计算统计量z-score，对于不同问题需要选用不同方法，如果要检验：</p><ol><li><p>两组样本均值是否具有显著差异，检验公式如下：</p><script type="math/tex;mode=display">Z= \frac{(\overline X_1 - \overline X_2) \  - \ (\mu_1 - \mu_2)}{\sqrt{\frac{\sigma_1^2}{n_1}+\frac{\sigma_2^2}{n_2}}}=\frac{(\overline X_1 - \overline X_2)}{\sqrt{\frac{\sigma_1^2}{n_1}+\frac{\sigma_2^2}{n_2}}} \\
+Z= \frac{(\overline X_1 - \overline X_2) \  - \ (\mu_1 - \mu_2)}{\sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}}=\frac{(\overline X_1 - \overline X_2)}{\sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}}</script><p>$\overline X$ 为样本均值，$\mu$ 为样本抽样的总体均值，$\sigma$是总体标准差，$s$ 是样本标准差</p></li><li><p>一组样本均值与已知总体均值是否具有显著差异，检验公式如下：</p><script type="math/tex;mode=display">Z=\frac{\overline X -\mu_0}{s/\sqrt{n}} \\
+Z=\frac{\overline X -\mu_0}{\sigma/\sqrt{n}}</script><p>$\overline X$ 为样本均值，$\mu_0$ 为假设与样本均值无显著差异的常数，$\sigma$是总体标准差，$s$ 是样本标准差</p></li></ol><p><strong>再强调一次，样本容量大于30时，样本标准差与总体标准差的误差非常小，样本容量越大，它们之间的误差越小。</strong></p><p>第三步，比较计算的z值和理论z值，推断发生概率</p><ul><li><p>双侧</p><p>| $|Z|$ | $P-value$ | 差异程度 |<br>| :————-: | :————-: | :———: |<br>| $\geq$ 2.58 | $\leq$ 0.01 | 非常显著 |<br>| $\geq$ 1.96 | $\leq$ 0.05 | 显著 |<br>| \&lt; 1.96 | > 0.05 | 不显著 |</p></li><li><p>单侧</p><p>同理上表，由于是单侧分布，因此当 Z值$\leq$-1.65 或 Z值$\geq$1.65 时，差异程度为显著</p></li></ul><p><strong>参考文献</strong></p><p><a href="https://en.wikipedia.org/wiki/Standard_score" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Standard_score</a></p><p><a href="https://en.wikipedia.org/wiki/Z-test" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Z-test</a></p><p><a href="https://wiki.mbalib.com/wiki/Z%E6%A3%80%E9%AA%8C" target="_blank" rel="noopener">https://wiki.mbalib.com/wiki/Z%E6%A3%80%E9%AA%8C</a></p><p><a href="https://zhuanlan.zhihu.com/p/86457717" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/86457717</a></p><h4 id="Normality-tests"><a href="#Normality-tests" class="headerlink" title="Normality tests"></a>Normality tests</h4><blockquote><p>In statistics, normality tests are used to determine if a data set is well-modeled by a normal distribution and to compute how likely it is for a random variable underlying the data set to be normally distributed.</p><p>—wiki</p></blockquote><p>t-test等检验都基于数据具有某种特征，比如正态分布等，而且其有效性取决于数据的分布。因此再进行检验前，最好先验证样本数据是否符合前提假设，如果不满足，可以考虑非参数检验。今天另一个重点讲的就是Mann–Whitney U test 非参数检验。</p><p>评估样本数据正态性可以考虑以下几个方法：</p><ol><li><p>大样本情况：如果样本数目大于30，可以默认为大样本情况，忽略其样本分布，采用参数检验，但最好采用目视检查或正态显著性检验等方法，查看其分布的正态性。</p></li><li><p>目视检查</p><p>正如上一篇t-test里所写到的</p><ul><li>密度图：查看其是否符合钟型分布</li><li>经验累积概率图：</li><li>QQ图：对照理论值和样本值分位数，查看样本与正态分布之间差别</li></ul></li><li><p>正态分布显著性检验</p><p>通常情况下，目视检查只能看个大概，并不可靠，可以采用显著性检验方法对样本与正态分布进行比较，以定量确定样本的偏离程度。</p><p>通常方法包括：</p><ol><li><p>图示法</p><p>P-P图 ppplot {需要包 StatDA}</p><p>(按照样本的累计频率为横坐标，正态分布累计频率为纵坐标)</p><p><img src="/post/7971f45/image-20201203214839241.png" alt="image-20201203214839241"></p><p>Q-Q图 qqplot()</p><p><img src="/post/7971f45/image-20201203215142342.png" alt="image-20201203215142342"></p><p>频率直方图 hist()</p><p><img src="/post/7971f45/image-20201203215203745.png" alt="image-20201203215203745"></p><p>箱线图 boxplot()</p><p><img src="/post/7971f45/image-20201203215249435.png" alt="image-20201203215249435"></p><p>茎叶图 stem()</p><p>茎叶图又称“枝叶图”，它的思路是将数组中的数按位数进行比较，将数的大小基本不变或变化不大的位作为一个主干（茎），将变化大的位的数作为分枝（叶），列在主干的后面，这样就可以清楚地看到每个主干后面的几个数，每个数具体是多少。</p><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt; stem(ts)</span><br><span class="line"></span><br><span class="line">  The decimal point is at the |</span><br><span class="line"></span><br><span class="line">  -<span class="number">2</span> | <span class="number">400</span></span><br><span class="line">  -<span class="number">1</span> | <span class="number">98884432211100000</span></span><br><span class="line">  -<span class="number">0</span> | <span class="number">999998877665444433322222111110000</span></span><br><span class="line">   <span class="number">0</span> | <span class="number">0111222223334556677778889</span></span><br><span class="line">   <span class="number">1</span> | <span class="number">011111222333455799</span></span><br><span class="line">   <span class="number">2</span> | <span class="number">017</span></span><br><span class="line">   <span class="number">3</span> | <span class="number">4</span></span><br></pre></td></tr></table></figure></li><li><p>偏度、峰度检验法(冒牌 K-S 检验法)</p><ul><li><p>S，K 检验 —— 偏度(Skewness)和峰度(Kurtosis)</p><p><strong>偏度 Skewness</strong></p><p>偏度衡量随机变量概率分布的不对称性，是相对于平均值不对称程度的度量，通过对偏度系数的测量，我们能够判定数据分布的不对称程度以及方向。</p><p>具体来说，对于随机变量X，我们定义偏度为其的三阶标准中心距:</p><script type="math/tex;mode=display">\gamma _ { 1 } = E [ ( \frac { X - \mu } { \delta } ) ^ { 3 } ] = \frac { E [ ( X - \mu ) ^ { 3 } ] } { \delta ^ { 3 } } = \frac { E [ ( X - \mu ) ^ { 3 } ] } { ( E [ ( X - \mu ) ^ { 2 } ] ) ^ { \frac { 3 } { 2 } } } = \frac { K _ { 3 } } { K _ { 2 } ^ { \frac { 3 } { 2 } } }</script><p>对于样本的偏度，我们一般记为SK，我们可以基于矩估计，得到有:</p><script type="math/tex;mode=display">S K _ { 1 } = \frac { m _ { 3 } } { m _ { 2 } ^ { \frac { 3 } { 2 } } } = \frac { \frac { 1 } { n } \sum _ { i = 1 } ^ { n } ( x _ { i } - \overline { x } ) ^ { 3 } } { [ \frac { 1 } { n } \sum _ { i = 1 } ^ { n } ( x _ { i } - \overline { x } ) ^ { 2 } ] ^ { \frac { 3 } { 2 } } }</script><p>其中，$\overline x$ 为样本均值，$m_3$ 为样本三阶中心矩，$m_2$ 是样本二阶中心矩</p><p>偏度的衡量是相对于正态分布来说，正态分布的偏度为0，即若数据分布是对称的，偏度为0。若偏度大于0，则分布右偏，即分布有一条长尾在右；若偏度小于0，则分布为左偏，即分布有一条长尾在左（如下图）；同时偏度的绝对值越大，说明分布的偏移程度越严重。</p><p>注意：数据分布的左偏或右偏，指的是数值拖尾的方向，而不是峰的位置。</p><p><strong>峰度 Kurtosis</strong></p><p>峰度，是研究数据分布陡峭或者平滑的统计量，通过对峰度系数的测量，我们能够判定数据相对于正态分布而言是更陡峭还是更平缓。比如正态分布的峰度为0，均匀分布的峰度为-1.2（平缓），指数分布的峰度6（陡峭）。</p><p>峰度，定义为四阶中心距 $m_4$ 除以方差 $\delta$ 的平方减3。</p><script type="math/tex;mode=display">\gamma _ { 2 } = \frac { K _ { 4 } } { K _ { 2 } ^ { 2 } } - 3 = \frac { \mu _ { 4 } } { \delta ^ { 4 } } - 3 = \frac { \frac { 1 } { n } \sum _ { i = 1 } ^ { n } ( x _ { i } - \overline { x } ) ^ { 4 } } { ( \frac { 1 } { n } \sum _ { i = 1 } ^ { n } ( x _ { i } - \overline { x } ) ^ { 2 } ) ^ { 2 } } - 3</script><p>若峰度 $\approx$ 0 , 分布的峰态服从正态分布；若峰度 > 0,分布的峰态陡峭（高尖）；若峰度 \&lt; 0,分布的峰态平缓（矮胖）；</p></li></ul></li></ol></li></ol><ul><li><p>Jarque-bera 检验 —— 偏度和峰度的联合分布</p><p>在统计学中，Jarque–Bera检验是对样本数据是否具有符合正态分布的偏度和峰度的拟合优度的检验。该检验以 Carlos Jarque and Anil K. Bera 来命名。JB统计量定义为</p><script type="math/tex;mode=display">JB=\frac{S^2}{6/n}+\frac{(K-3)^2}{24/n}</script><p>其中n是观测数(或自由度); S是样本偏度，K是样本峰度：</p><script type="math/tex;mode=display">S = \frac { \hat { \mu } _ { 3 } } { \hat { \sigma } ^ { 3 } } = \frac { \frac { 1 } { n } \sum _ { i = 1 } ^ { n } ( x _ { i } - \overline { x } ) ^ { 3 } } { ( \frac { 1 } { n } \sum _ { i = 1 } ^ { n } ( x _ { i } - \overline { x } ) ^ { 2 } ) ^ { 3 / 2 } } \\
+      K = \frac { \hat { \mu } _ { 4 } } { \hat { \sigma } ^ { 4 } } = \frac { \frac { 1 } { n } \sum _ { i = 1 } ^ { n } ( x _ { i } - \overline { x } ) ^ { 4 } } { ( \frac { 1 } { n } \sum _ { i = 1 } ^ { n } ( x _ { i } - \overline { x } ) ^ { 2 } ) ^ { 4 / 2 } }</script><p>其中 $\hat \mu_3$ 和 $\hat \mu_4$ 分别是三阶中心矩和四阶中心矩的估计值，$\overline x$ 是样本均值，$\hat \sigma^2$是二阶中心矩（即方差）的估计值。</p><p>如果样本数据来自具有正态分布的总体，JB统计量近似服从自由度为2的卡方分布，即 JBasy ~$\chi^2$，因此该统计量可以用于检验数据是否服从正态分布。原假设H<sub>0</sub>是偏度为0，峰度为3(因为正态分布的偏度为0，峰度为3)，若变量不是正态分布，则JB统计量将为一个逐渐增大值。</p><p>如果JB统计量值较大，比如为11，则可以计算出卡方值大于11的概率为0.004，这个概率过小，因此不能认为样本来自正态分布。反之，成立。</p><p>JB统计量用来检验序列观测值是否服从正态分布，该检验的零假设为样本服从正态分布。在零假设下，JB统计量服从$\chi^2 (2)$分布，变量X服从正态分布。</p></li></ul><p>非参数检验方法</p><p>在我国国标《GB/T4882-2001数据的统计处理和解释：正态性检验》中，在有方向的检验方法中，推荐了偏度和峰度检验；在无方向的检验方法中，推荐了Shapiro–Wilk检验和Epps-Pulley检验，并明确Shapiro–Wilk检验适用于8≤n≤50的样本数据，Epps-Pulley检验适用于n≥8的样本。</p><ul><li><p>K-S检验 —— Kolmogorov-Smirnov检验</p><p>K-S检验的思路是那样本数据和期望的理论分布进行对比，若差异不大，则可以认为服从正态分布。</p><p><img src="/post/7971f45/v2-044674d02d820d94ec7d8e409978b43a_720w.png" alt="img"></p><p>Kolmogorov检验找出在每一个数据点上经验累积概率与目标分布的累积概率之差的上界，列出公式是这样的：</p><script type="math/tex;mode=display">D_n=sup_x|F_n(x)-F(x)|</script><p>其中$sup$函数表示一组距离中的上确界，这是个数学概念，表示在原假设$F_n(x)-F(x)$ 的条件下，$F_n(x)-F(x)$ 的绝对值的最小上界。$F_n(x)$和$F(x)$分别代表经验的和理论的累积概率。其意图在于如果原假设成立，则$D_n$应该很小，如果很大，则原假设不成立。</p><p>计算上确界：</p><script type="math/tex;mode=display">D _ { n } = \operatorname { sup }_x | F _ { n } ( x ) - F _ { 0 } ( x ) | = \operatorname { max } _ { 1 \leq k \leq n } \{ | F _ { n } ( x _ { k } ) - F _ { 0 } ( x _ { k } ) | , \  | F _ { 0 } ( x _ { k + 1 } ) - F _ { n } ( x _ { k } ) | \}</script><p>其中$k$为样本从小到大排列后的序数。从公式中看出$D_n$是经验和目标累积概率之差和错一位后再求出的差中最大的一个。Kolmogorov还给出了这个距离的分布函数，并给出了判断的临界值。</p><p>Smirnov检验则是针对两组样本数据是否服从同一分布的检验，其思想与Kolmogorov检验一致，区别在于Smirnov检验计算的是两个样本累积概率的最大差值，当然统计量分布和临界值表肯定也不一样。</p><p>此方法假设总体的参数是已知的，但这在实际应用中是很难做到的。在这种情况下通常用样本均值和标准差代替总体均值和标准差，这就是所谓的Lilliefors正态性检验。</p></li><li><p>Lilliefors检验</p><p>Lilliefors检验是基于Kolmogorov-Smirnov检验的正态检验。被用来测试H<sub>0</sub>不指定其正态分布，即没有指定期望值和方差。</p><p>流程为采用样本数据估算总体平均值和总体方差，找到经验分布函数和正态分布累计分布函数之间最大区别，评估最大差异是否足够大到其统计的显著性，同需查表。</p></li><li><p>Anderson–Darling AD检验</p><p>这个方法是由T. W. Anderson和D. A. Darling于1954年提出的，与K-S检验相比，AD检验度量经验累积概率和理论累积概率之差的方法显得更加自然。下面的公式就是其方法：</p><script type="math/tex;mode=display">Z = n \int _ { - \infty } ^ { \infty } [ F _ { n } ( x ) - F ( x ) ] ^ { 2 } w ( x ) f ( x ) d x</script><p>其中$f(x)$是理论分布密度函数，$w(x)$是权重函数。若$w(x)=1$，则为Cramér-Von Mises统计量$W^2$</p><p>有些类似方差公式并乘以权重，就是把每个数据点的差求平方以后相加，得到总的分布偏差，这样就考虑了所有的差异点，而不是像K-S检验那样只考虑一个最大的。</p><p>但是其积分计算并不容易，可以采用</p><script type="math/tex;mode=display">A ^ { 2 } = - n - \sum _ { i } \frac { 2 i - 1 } { n } [ \operatorname { ln } F ( Y _ { i } ) + \operatorname { ln } ( 1 - F ( Y _ { n + 1 - i } ) ) ]</script><p>其中</p><script type="math/tex;mode=display">Y _ { i } = \frac { X _ { i } - \hat { \mu } } { \hat { \sigma } }</script><p>这个公式计算所采用的数据顺序是从小到大排列的，不是原来的数据排列顺序。</p></li><li><p>Shapiro–Wilk W检验</p><p>K-S检验统计量用的是经验累积概率与目标理论累积概率之差的最大值，这有点像计算极差；AD检验则把所有的差平方后求和，有点像计算方差。当然计算方差的稳健性(Robustness)要好一些，这可能也是AD检验得到更多应用的原因。</p><p>Shapiro–Wilk W检验，按照维基百科中，W检验类似是计算相关系数，这个数越接近1，则越有可能正态。</p><script type="math/tex;mode=display">W = \frac { R ^ { 4 } \hat { \sigma } ^ { 2 } } { C ^ { 2 } S ^ { 2 } } = \frac { b ^ { 2 } } { S ^ { 2 } } = \frac { ( a ^ { \prime } y ) ^ { 2 } } { S ^ { 2 } } = ( \sum _ { i = 1 } ^ { n } a _ { i } y _ { i } ) ^ { 2 } / \sum _ { i = 1 } ^ { n } ( y _ { i } - \overline { y } ) ^ { 2 } \\
+或 \ W = \frac { ( \sum _ { i = 1 } ^ { \frac { n } { 2 } } a _ { i } ( y _ { n + 1 - i } - y _ { i } ) ) ^ { 2 } } { \sum _ { i = 1 } ^ { n } ( y _ { i } - \overline { y } ) ^ { 2 } }</script><p>上者出自Shapiro和Wilk论文，下者出自梁小筠教授的《正态性检验》。</p><p><strong>关于正态性检验哪个好，可以参考这篇文章</strong></p><p><a href="https://zhuanlan.zhihu.com/p/26608758" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/26608758</a></p><p><strong>关于数据不正态，进行数据正态转化可以参考这篇文章</strong></p><p><a href="https://zhuanlan.zhihu.com/p/26784184" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/26784184</a></p><p><a href="https://zhuanlan.zhihu.com/p/26869997" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/26869997</a></p></li></ul><p><strong>参考文献：</strong></p><p>马廷老师的ppt</p><p>《GB/T4882-2001数据的统计处理和解释：正态性检验》</p><p><a href="https://zhuanlan.zhihu.com/p/53184516" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/53184516</a></p><p><a href="https://www.docin.com/p-2006164716.html" target="_blank" rel="noopener">https://www.docin.com/p-2006164716.html</a></p><p><a href="https://zhuanlan.zhihu.com/p/53559300" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/53559300</a></p><p><a href="https://zhuanlan.zhihu.com/p/26477641" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/26477641</a></p><p><a href="http://college.gcbi.com.cn/archives/1863" target="_blank" rel="noopener">http://college.gcbi.com.cn/archives/1863</a></p><p><a href="https://zhuanlan.zhihu.com/p/26477641" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/26477641</a></p><p><a href="http://blog.sina.com.cn/s/blog_65efeb0c0100htz7.html" target="_blank" rel="noopener">http://blog.sina.com.cn/s/blog_65efeb0c0100htz7.html</a></p><p><a href="https://zh.wikipedia.org/zh-hans/Jarque-Bera%E6%A3%80%E9%AA%8C" target="_blank" rel="noopener">https://zh.wikipedia.org/zh-hans/Jarque-Bera%E6%A3%80%E9%AA%8C</a></p><p><a href="https://blog.minitab.com/blog" target="_blank" rel="noopener">https://blog.minitab.com/blog</a></p><p><a href="https://en.wikipedia.org/wiki/Kolmogorov%E2%80%93Smirnov_test" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Kolmogorov%E2%80%93Smirnov_test</a></p><p><a href="https://blog.csdn.net/qq_20207459/article/details/103000285" target="_blank" rel="noopener">https://blog.csdn.net/qq_20207459/article/details/103000285</a></p></div><footer class="post-footer"><div class="post-tags"><a href="/tags/%E7%A9%BA%E9%97%B4%E5%88%86%E6%9E%90/" rel="tag"><i class="fa fa-tag"></i> 空间分析</a></div><div class="post-nav"><div class="post-nav-item"><a href="/post/f5b12c10.html" rel="prev" title="[空间分析]叁·地理统计"><i class="fa fa-chevron-left"></i> [空间分析]叁·地理统计</a></div><div class="post-nav-item"></div></div></footer></article></div><script>window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }</script></div><div class="toggle sidebar-toggle"><span class="toggle-line toggle-line-first"></span> <span class="toggle-line toggle-line-middle"></span> <span class="toggle-line toggle-line-last"></span></div><aside class="sidebar"><div class="sidebar-inner"><ul class="sidebar-nav motion-element"><li class="sidebar-nav-toc">文章目录</li><li class="sidebar-nav-overview">站点概览</li></ul><div class="post-toc-wrap sidebar-panel"><div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#z-test"><span class="nav-number">1.</span> <span class="nav-text">z-test</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Normality-tests"><span class="nav-number">2.</span> <span class="nav-text">Normality tests</span></a></li></ol></div></div><div class="site-overview-wrap sidebar-panel"><div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person"><img class="site-author-image" itemprop="image" alt="JoeSun" src="/images/avatar.jpg"><p class="site-author-name" itemprop="name">JoeSun</p><div class="site-description" itemprop="description"></div></div><div class="site-state-wrap motion-element"><nav class="site-state"><div class="site-state-item site-state-posts"><a href="/archives"><span class="site-state-item-count">21</span> <span class="site-state-item-name">日志</span></a></div><div class="site-state-item site-state-categories"><a href="/categories/"><span class="site-state-item-count">6</span> <span class="site-state-item-name">分类</span></a></div><div class="site-state-item site-state-tags"><a href="/tags/"><span class="site-state-item-count">13</span> <span class="site-state-item-name">标签</span></a></div></nav></div><div class="links-of-author motion-element"><span class="links-of-author-item"><a href="https://github.com/JosephSun-6" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;JosephSun-6" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a> </span><span class="links-of-author-item"><a href="mailto:417773447@qq.com" title="E-Mail → mailto:417773447@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a></span></div></div><script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script><script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script><div class="widget-wrap"><div id="myCanvasContainer" class="widget tagcloud"><canvas width="220" height="250" id="resCanvas"><ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Mining/" rel="tag">Data Mining</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DeeperLearning/" rel="tag">DeeperLearning</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDL/" rel="tag">IDL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VS/" rel="tag">VS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/arcgis-for-js/" rel="tag">arcgis for js</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/" rel="tag">js</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B8%A9%E5%BA%A6%E5%8F%8D%E6%BC%94/" rel="tag">温度反演</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E6%B4%BB/" rel="tag">生活</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A9%BA%E9%97%B4%E5%88%86%E6%9E%90/" rel="tag">空间分析</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a><span class="tag-list-count">1</span></li></ul></canvas></div></div></div></aside><div id="sidebar-dimmer"></div></div></main><footer class="footer"><div class="footer-inner"><div class="beian"><a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">晋ICP备20000688号-1 </a><img src="/image/beian.jpg" style="display:inline-block"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=14082702000119" rel="noopener" target="_blank">晋公网备案 14082702000119号</a></div><div class="copyright">&copy; <span itemprop="copyrightYear">2020</span> <span class="with-love"><i class="fa fa-heart"></i> </span><span class="author" itemprop="copyrightHolder">JoeSun</span> <span class="post-meta-divider">|</span> <span class="post-meta-item-icon"><i class="fa fa-chart-area"></i> </span><span title="站点总字数">58k</span> <span class="post-meta-divider">|</span> <span class="post-meta-item-icon"><i class="fa fa-coffee"></i> </span><span title="站点阅读时长">53 分钟</span></div><div class="busuanzi-count"><script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span class="post-meta-item" id="busuanzi_container_site_uv" style="display:none"><span class="post-meta-item-icon"><i class="fa fa-user"></i> </span><span class="site-uv" title="总访客量"><span id="busuanzi_value_site_uv"></span> </span></span><span class="post-meta-divider">|</span> <span class="post-meta-item" id="busuanzi_container_site_pv" style="display:none"><span class="post-meta-item-icon"><i class="fa fa-eye"></i> </span><span class="site-pv" title="总访问量"><span id="busuanzi_value_site_pv"></span></span></span></div><script>(function() {
+    function leancloudSelector(url) {
+      url = encodeURI(url);
+      return document.getElementById(url).querySelector('.leancloud-visitors-count');
+    }
+
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.id);
+      var title = visitors.dataset.flagTitle;
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            leancloudSelector(url).innerText = counter.time + 1;
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              });
+          } else {
+              Counter('post', '/classes/Counter', { title, url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.id);
+      });
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url: { '$in': entries } })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          for (let url of entries) {
+            let target = results.find(item => item.url === url);
+            leancloudSelector(url).innerText = target ? target.time : 0;
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    let { app_id, app_key, server_url } = {"enable":true,"app_id":"lGA8jDiu9xwPn8eGaVF2Ne2q-gzGzoHsz","app_key":"lI98i4LNGKqPDmaQTixb93yG","security":false,"betterPerformance":false};
+    function fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${api_server}/1.1${url}`, {
+          method,
+          headers: {
+            'X-LC-Id'     : app_id,
+            'X-LC-Key'    : app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    }
+
+    let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+
+    if (api_server) {
+      fetchData(api_server);
+    } else {
+      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+        .then(response => response.json())
+        .then(({ api_server }) => {
+          fetchData('https://' + api_server);
+        });
+    }
+  })();</script></div></footer></div><script color="0,0,254" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script><script src="/lib/anime.min.js"></script><script src="/lib/velocity/velocity.min.js"></script><script src="/lib/velocity/velocity.ui.min.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><script>!function(){var e,t,o,n,r=document.getElementsByTagName("link");if(0<r.length)for(i=0;i<r.length;i++)"canonical"==r[i].rel.toLowerCase()&&r[i].href&&(e=r[i].href);t=(e||window.location.protocol).split(":")[0],e=e||window.location.href,window,o=e,n=document.referrer,/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi.test(o)||(t="https"===String(t).toLowerCase()?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif",n?(t+="?r="+encodeURIComponent(document.referrer),o&&(t+="&l="+o)):o&&(t+="?l="+o),(new Image).src=t)}()</script><script>if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}</script><script>if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }</script><script>NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'lGA8jDiu9xwPn8eGaVF2Ne2q-gzGzoHsz',
+      appKey     : 'lI98i4LNGKqPDmaQTixb93yG',
+      placeholder: "Just go go",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'zh-cn' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});</script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({pluginRootPath:"live2dw/",pluginJsPath:"lib/",pluginModelPath:"assets/",tagMode:!1,debug:!1,model:{jsonPath:"/live2dw/assets/hijiki.model.json"},display:{position:"left",width:150,height:300},mobile:{show:!0},react:{opacity:.7},log:!1})</script></body></html>
